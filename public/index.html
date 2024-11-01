@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter</title>
+</head>
+<body>
+    <h1>Click Counter</h1>
+    <p>Counter: <span id="counter">0</span></p>
+    <button id="clickButton">Click Me!</button>
+    <button id="resetButton">Reset Counter</button>
+    <script>
+        const counterEl = document.getElementById('counter');
+        const clickButton = document.getElementById('clickButton');
+        const resetButton = document.getElementById('resetButton');
+
+        clickButton.addEventListener('click', () => {
+            fetch('/counter')
+                .then(response => response.json())
+                .then(data => {
+                    counterEl.textContent = data.counter;
+                });
+        });
+
+        resetButton.addEventListener('click', () => {
+            fetch('/reset')
+                .then(response => response.json())
+                .then(data => {
+                    counterEl.textContent = data.counter;
+                });
+        });
+    </script>
+</body>
+</html>
